@@ -1,4 +1,4 @@
-﻿
+
 /*
     BSD 3-Clause License
 
@@ -31,31 +31,44 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-using System;
-using Convolutions;
-using Colors;
+using System.Numerics;
 
-namespace CSharpers
+namespace Colors;
+
+class Normalization
 {
-    class Program
+    public static void Chromaticity()
     {
-        public static void Main()
+        Console.WriteLine("Input color (red, green, blue)");
+        string[] userColor = Console.ReadLine().Split(',');
+
+        Vector3 inputColor = new Vector3
+        (
+            float.Parse(userColor[0]),
+            float.Parse(userColor[1]),
+            float.Parse(userColor[2])
+        );
+
+        Vector3 normalizedOutput = inputColor / Vector3.Dot(inputColor, Vector3.One);
+
+        bool correctInput = false;
+
+        do
         {
-            string[] userChoices = { "Gaussian Blur", "Normalize Color" };
+            Console.WriteLine("Choose output:\nRG Chromaticity\nNormalized RGB");
+            string userInput = Console.ReadLine().ToLower();
 
-            Console.WriteLine($"Type the following:\n{String.Join("\n", userChoices)}");
-
-            string userChoice = Console.ReadLine().ToLower();
-
-            switch(userChoice)
+            switch (userInput)
             {
-                case "gaussian blur":
-                    GaussianBlur.Calculate();
+                case "rg chromaticity":
+                    correctInput = true;
+                    Console.WriteLine($"Output: {normalizedOutput.X}, {normalizedOutput.Y}");
                     break;
-                case "normalize color":
-                    Normalization.Chromaticity();
+                case "normalized rgb":
+                    correctInput = true;
+                    Console.WriteLine($"Output: {normalizedOutput.X}, {normalizedOutput.Y}, {normalizedOutput.Z}");
                     break;
             }
-        }
+        } while (correctInput == false);
     }
 }
