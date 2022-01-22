@@ -1,0 +1,15 @@
+C:\Users\pauld\Documents\Projects\shadernet\bin\Debug\net6.0\shadernet.exe
+C:\Users\pauld\Documents\Projects\shadernet\bin\Debug\net6.0\shadernet.deps.json
+C:\Users\pauld\Documents\Projects\shadernet\bin\Debug\net6.0\shadernet.runtimeconfig.json
+C:\Users\pauld\Documents\Projects\shadernet\bin\Debug\net6.0\shadernet.dll
+C:\Users\pauld\Documents\Projects\shadernet\bin\Debug\net6.0\ref\shadernet.dll
+C:\Users\pauld\Documents\Projects\shadernet\bin\Debug\net6.0\shadernet.pdb
+C:\Users\pauld\Documents\Projects\shadernet\obj\Debug\net6.0\shadernet.csproj.AssemblyReference.cache
+C:\Users\pauld\Documents\Projects\shadernet\obj\Debug\net6.0\shadernet.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pauld\Documents\Projects\shadernet\obj\Debug\net6.0\shadernet.AssemblyInfoInputs.cache
+C:\Users\pauld\Documents\Projects\shadernet\obj\Debug\net6.0\shadernet.AssemblyInfo.cs
+C:\Users\pauld\Documents\Projects\shadernet\obj\Debug\net6.0\shadernet.csproj.CoreCompileInputs.cache
+C:\Users\pauld\Documents\Projects\shadernet\obj\Debug\net6.0\shadernet.dll
+C:\Users\pauld\Documents\Projects\shadernet\obj\Debug\net6.0\ref\shadernet.dll
+C:\Users\pauld\Documents\Projects\shadernet\obj\Debug\net6.0\shadernet.pdb
+C:\Users\pauld\Documents\Projects\shadernet\obj\Debug\net6.0\shadernet.genruntimeconfig.cache
