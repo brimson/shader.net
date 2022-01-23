@@ -49,7 +49,7 @@ class Normalization
             float.Parse(userColor[2])
         );
 
-        Vector3 normalizedOutput = inputColor / Vector3.Dot(inputColor, Vector3.One);
+        Vector3 normalizedColor = inputColor / Vector3.Dot(inputColor, Vector3.One);
 
         bool correctInput = false;
 
@@ -62,11 +62,11 @@ class Normalization
             {
                 case "rg chromaticity":
                     correctInput = true;
-                    Console.WriteLine($"Output: {normalizedOutput.X}, {normalizedOutput.Y}");
+                    Console.WriteLine(String.Join("\n", new Vector2(normalizedColor.X, normalizedColor.Y)));
                     break;
                 case "normalized rgb":
                     correctInput = true;
-                    Console.WriteLine($"Output: {normalizedOutput.X}, {normalizedOutput.Y}, {normalizedOutput.Z}");
+                    Console.WriteLine(String.Join("\n", normalizedColor));
                     break;
             }
         } while (correctInput == false);
