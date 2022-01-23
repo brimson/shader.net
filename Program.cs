@@ -41,7 +41,7 @@ namespace CSharpers
     {
         public static void Main()
         {
-            string[] userChoices = { "Gaussian Blur", "Normalize Color" };
+            string[] userChoices = { "Gaussian Blur", "Normalize Color", "Blend Alpha" };
 
             Console.WriteLine($"Type the following:\n{String.Join("\n", userChoices)}");
 
@@ -54,6 +54,9 @@ namespace CSharpers
                     break;
                 case "normalize color":
                     Normalization.Chromaticity();
+                    break;
+                case "blend alpha":
+                    Alpha.Blend();
                     break;
             }
         }
