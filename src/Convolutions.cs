@@ -33,57 +33,58 @@
 
 using System.Numerics;
 
-namespace Convolutions;
-
-class GaussianBlur
+namespace Convolutions
 {
-    public static float Weight(float pixelIndex, float kernelSize)
+    class GaussianBlur
     {
-        var pi = 3.141592653589793238462643f;
-        var sigma = kernelSize / 3.0f;
-        var output = 1.0f / MathF.Sqrt(2.0f * pi * (sigma * sigma));
-        return output * MathF.Exp(-(pixelIndex * pixelIndex) / (2.0f * (sigma * sigma)));
-    }
-
-    public static void Calculate()
-    {
-        Console.WriteLine("Enter kernel size:");
-        int kernelTaps = Convert.ToInt32(Console.ReadLine());
-
-        // Initialize list of weights and offsets to print
-        var weightList = new List<float>();
-        var offsetList = new List<float>();
-
-        // Calculate center tap first
-        weightList.Add(Weight(0, kernelTaps));
-        offsetList.Add(0.0f);
-
-        // Initialize loop parameters
-        int pixelIndex = 1;
-        int valueIndex = 0;
-        Vector2 pixelWeight = new Vector2();
-        Vector2 pixelOffset = new Vector2();
-
-        // Remaining taps (negate offsets for left-sided taps)
-        while (pixelIndex < kernelTaps)
+        public static float Weight(float pixelIndex, float kernelSize)
         {
-            pixelOffset.X = pixelIndex;
-            pixelOffset.Y = pixelIndex + 1;
-            pixelWeight.X = Weight(pixelOffset.X, kernelTaps);
-            pixelWeight.Y = Weight(pixelOffset.Y, kernelTaps);
-
-            float linearWeight = pixelWeight.X + pixelWeight.Y;
-            float linearOffset = Vector2.Dot(pixelOffset, pixelWeight) / linearWeight;
-
-            offsetList.Add(linearOffset);
-            weightList.Add(linearWeight);
-
-            pixelIndex += 2;
-            valueIndex += 1;
+            var pi = 3.141592653589793238462643f;
+            var sigma = kernelSize / 3.0f;
+            var output = 1.0f / MathF.Sqrt(2.0f * pi * (sigma * sigma));
+            return output * MathF.Exp(-(pixelIndex * pixelIndex) / (2.0f * (sigma * sigma)));
         }
 
-        string totalOffsets = String.Join(", ", offsetList);
-        string totalWeights = String.Join(", ", weightList);
-        Console.WriteLine($"Offsets: {totalOffsets}\nWeights: {totalWeights}");
+        public static void Calculate()
+        {
+            Console.WriteLine("Enter kernel size:");
+            int kernelTaps = Convert.ToInt32(Console.ReadLine());
+
+            // Initialize list of weights and offsets to print
+            var weightList = new List<float>();
+            var offsetList = new List<float>();
+
+            // Calculate center tap first
+            weightList.Add(Weight(0, kernelTaps));
+            offsetList.Add(0.0f);
+
+            // Initialize loop parameters
+            int pixelIndex = 1;
+            int valueIndex = 0;
+            Vector2 pixelWeight = new Vector2();
+            Vector2 pixelOffset = new Vector2();
+
+            // Remaining taps (negate offsets for left-sided taps)
+            while (pixelIndex < kernelTaps)
+            {
+                pixelOffset.X = pixelIndex;
+                pixelOffset.Y = pixelIndex + 1;
+                pixelWeight.X = Weight(pixelOffset.X, kernelTaps);
+                pixelWeight.Y = Weight(pixelOffset.Y, kernelTaps);
+
+                float linearWeight = pixelWeight.X + pixelWeight.Y;
+                float linearOffset = Vector2.Dot(pixelOffset, pixelWeight) / linearWeight;
+
+                offsetList.Add(linearOffset);
+                weightList.Add(linearWeight);
+
+                pixelIndex += 2;
+                valueIndex += 1;
+            }
+
+            string totalOffsets = String.Join(", ", offsetList);
+            string totalWeights = String.Join(", ", weightList);
+            Console.WriteLine($"Offsets: {totalOffsets}\nWeights: {totalWeights}");
+        }
     }
 }

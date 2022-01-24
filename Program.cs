@@ -35,7 +35,7 @@ using System;
 using Convolutions;
 using Colors;
 
-namespace CSharpers
+namespace ShaderNet
 {
     class Program
     {

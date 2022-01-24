@@ -33,77 +33,78 @@
 
 using System.Numerics;
 
-namespace Colors;
-
-class Normalization
+namespace Colors
 {
-    public static void Chromaticity()
+    class Normalization
     {
-        Console.WriteLine("Input color (red, green, blue)");
-        
-        Vector3 inputColor = new Vector3(Array.ConvertAll(Console.ReadLine().Split(','), float.Parse));
-
-        Vector3 normalizedColor = inputColor / Vector3.Dot(inputColor, Vector3.One);
-
-        bool correctInput = false;
-
-        do
+        public static void Chromaticity()
         {
-            Console.WriteLine("Choose output:\nRG Chromaticity\nNormalized RGB");
+            Console.WriteLine("Input color (red, green, blue)");
+            
+            Vector3 inputColor = new Vector3(Array.ConvertAll(Console.ReadLine().Split(','), float.Parse));
 
-            switch (Console.ReadLine().ToLower())
+            Vector3 normalizedColor = inputColor / Vector3.Dot(inputColor, Vector3.One);
+
+            bool correctInput = false;
+
+            do
             {
-                case "rg chromaticity":
-                    correctInput = true;
-                    Console.WriteLine($"Output: {String.Join("\n", new Vector2(normalizedColor.X, normalizedColor.Y))}");
-                    break;
-                case "normalized rgb":
-                    correctInput = true;
-                    Console.WriteLine($"Output: {String.Join("\n", normalizedColor)}");
-                    break;
-            }
-        } while (correctInput == false);
+                Console.WriteLine("Choose output:\nRG Chromaticity\nNormalized RGB");
+
+                switch (Console.ReadLine().ToLower())
+                {
+                    case "rg chromaticity":
+                        correctInput = true;
+                        Console.WriteLine($"Output: {String.Join("\n", new Vector2(normalizedColor.X, normalizedColor.Y))}");
+                        break;
+                    case "normalized rgb":
+                        correctInput = true;
+                        Console.WriteLine($"Output: {String.Join("\n", normalizedColor)}");
+                        break;
+                }
+            } while (correctInput == false);
+        }
     }
-}
 
-class Alpha
-{
-    public static void Blend()
+    class Alpha
     {
-        // Ask user to input source RGB color
-        Console.WriteLine("Input source color (red, green, blue)");
-        Vector3 sourceColor = new Vector3(Array.ConvertAll(Console.ReadLine().Split(','), float.Parse));
-
-        // Ask user to input source alpha
-        Console.WriteLine("Input source alpha (0-1)");
-        float alphaScalar = Math.Clamp(float.Parse(Console.ReadLine()), 0.0f, 1.0f);
-        Vector3 alphaVector = new Vector3(alphaScalar);
-
-        // Premultiply or not
-        Console.WriteLine("Do you want to pre-multiply the source? (y/n)");
-        sourceColor = (Console.ReadLine() == "y") ? sourceColor * alphaVector : sourceColor;
-
-        // Ask user to input destination RGB color
-        Console.WriteLine("Input destination color (red, green, blue)");
-        Vector3 destinationColor = new Vector3(Array.ConvertAll(Console.ReadLine().Split(','), float.Parse));
-
-        bool correctInput = false;
-
-        do
+        public static void Blend()
         {
-            Console.WriteLine("Choose output:\nStraight Alpha\nAssociated Alpha");
+            // Ask user to input source RGB color
+            Console.WriteLine("Input source color (red, green, blue)");
+            Vector3 sourceColor = new Vector3(Array.ConvertAll(Console.ReadLine().Split(','), float.Parse));
 
-            switch (Console.ReadLine().ToLower())
+            // Ask user to input source alpha
+            Console.WriteLine("Input source alpha (0-1)");
+            float alphaScalar = Math.Clamp(float.Parse(Console.ReadLine()), 0.0f, 1.0f);
+            Vector3 alphaVector = new Vector3(alphaScalar);
+
+            // Premultiply or not
+            Console.WriteLine("Do you want to pre-multiply the source? (y/n)");
+            sourceColor = (Console.ReadLine() == "y") ? sourceColor * alphaVector : sourceColor;
+
+            // Ask user to input destination RGB color
+            Console.WriteLine("Input destination color (red, green, blue)");
+            Vector3 destinationColor = new Vector3(Array.ConvertAll(Console.ReadLine().Split(','), float.Parse));
+
+            bool correctInput = false;
+
+            do
             {
-                case "straight alpha":
-                    correctInput = true;
-                    Console.WriteLine($"Output: {Vector3.Lerp(destinationColor, sourceColor, alphaScalar)}");
-                    break;
-                case "associated alpha":
-                    correctInput = true;
-                    Console.WriteLine($"Output: {sourceColor + (destinationColor * (Vector3.One - alphaVector))}");
-                    break;
-            }
-        } while (correctInput == false);
+                Console.WriteLine("Choose output:\nStraight Alpha\nAssociated Alpha");
+
+                switch (Console.ReadLine().ToLower())
+                {
+                    case "straight alpha":
+                        correctInput = true;
+                        Console.WriteLine($"Output: {Vector3.Lerp(destinationColor, sourceColor, alphaScalar)}");
+                        break;
+                    case "associated alpha":
+                        correctInput = true;
+                        Console.WriteLine($"Output: {sourceColor + (destinationColor * (Vector3.One - alphaVector))}");
+                        break;
+                }
+            } while (correctInput == false);
+        }
     }
 }
